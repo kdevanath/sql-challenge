@@ -34,8 +34,6 @@ from dept_manager dm
 JOIN departments d on d.dept_no = dm.dept_no
 JOIN employees e on e.emp_no = dm.emp_no;
 
-List the department of each employee with the following information: employee number, last name, first name, and department name.
-
 select 
 d.dept_name as "department",
 d.dept_no,
@@ -47,6 +45,39 @@ JOIN dept_emp de on de.dept_no = d.dept_no
 JOIN employees e on de.emp_no = e.emp_no
 order by d.dept_no
 ;
+
+select 
+e.first_name as "first name", 
+e.last_name as "last name", 
+e.sex
+from employees e
+where e.first_name = 'Hercules' and e.last_name like 'B%';
+
+select 
+e.emp_no as "employee number",
+e.last_name as "last name",
+e.first_name as "first name",
+d.dept_name as "department name"
+from departments d 
+JOIN dept_emp de on d.dept_no = de.dept_no
+JOIN  employees e on e.emp_no = de.emp_no
+where d.dept_name = 'Sales';
+
+select 
+e.emp_no as "employee number",
+e.last_name as "last name",
+e.first_name as "first name",
+d.dept_name as "department name"
+from departments d 
+JOIN dept_emp de on d.dept_no = de.dept_no
+JOIN  employees e on e.emp_no = de.emp_no
+where d.dept_name = 'Sales' or d.dept_name = 'Development';
+
+select count(last_name) as "shared last names", last_name as "last name"
+from employees 
+group by last_name
+order by "shared last names" desc ;
+
 select * from departments;
 
 select count(emp_no), dept_no from dept_emp 
